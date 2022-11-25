@@ -81,6 +81,7 @@ if __name__ == '__main__':
     ozon.get_elements()
     ozon.get_os()
     data = ozon.get_parsed_data()
+    ozon.close()
     links = {}
     for link in data:
         try:
@@ -88,6 +89,8 @@ if __name__ == '__main__':
         except:
             links.update({link["os"]: 1})
     links = sorted(links.items(), key=lambda x: x[1], reverse=True)
+    output = open("output.txt", "w")
     for link in links:
-        print("{} - {}".format(link[0], link[1]))
-    ozon.close()
+        output.write("{} - {}\n".format(link[0], link[1]))
+    output.close()
+
